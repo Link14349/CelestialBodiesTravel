@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Celestial Bodies Travel</title>
+    <script type="text/javascript" src="src/index.js"></script>
+    <script type="text/javascript" src="src/math.js"></script>
+    <script type="text/javascript" src="src/physical.js"></script>
+    <script type="text/javascript" src="src/CB.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        #canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .board {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-color: #aaa;
+        }
+        .board h6 {
+            text-align: center;
+        }
+        .board input {
+            width: 50px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+        .board p {
+            margin-left: 10px;
+        }
+        .board button {
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: center;
+            margin: 5px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="board">-->
+    <!--<h6>Celestial Bodies Settings Board</h6>-->
+    <!--<p>Radius: <input type="number" id="BNRadius" value="6.371"/>e<input type="number" id="indexRadius" value="3"/></p>-->
+    <!--&lt;!&ndash;BN就是Base Number的缩写，即底数&ndash;&gt;-->
+    <!--<p>Weight: <input type="number" id="BNWeight" value="5.965"/>e<input type="number" id="indexWeight" value="24"/></p>-->
+    <!--<p>Power: (<span id="Powerx">0</span>, <span id="Powery">0</span>)</p>-->
+    <!--<button id="create">Create</button>-->
+<!--</div>-->
+<canvas id="canvas"></canvas>
+<script type="text/javascript">
+    let cbt = new CBTravel(document.getElementById("canvas"));
+    cbt.width = window.innerWidth * 5;
+    cbt.height = window.innerHeight * 5;
+    let Sun1 = new CBTravel.CB.CB(new CBTravel.math.Vector2(-3e9, 3e9), 1e34, 2512560, new CBTravel.math.Vector2(1.5e+40, -3e+39), cbt);
+    let Sun2 = new CBTravel.CB.CB(new CBTravel.math.Vector2(3e9, 3e9), 3.2e33, 2512560, new CBTravel.math.Vector2(-1.5e+30, -3e+40), cbt);
+    let Sun3 = new CBTravel.CB.CB(new CBTravel.math.Vector2(0, 7e8), 1e34, 2512560, new CBTravel.math.Vector2(-5e+40, -6e+40), cbt);
+    let Sun4 = new CBTravel.CB.CB(new CBTravel.math.Vector2(-7e9, -6e8), 1e34, 2512560, new CBTravel.math.Vector2(5e+41, 6e+41), cbt);
+    let Sun5 = new CBTravel.CB.CB(new CBTravel.math.Vector2(-7e10, -6e8), 5e36, 2512560, new CBTravel.math.Vector2(2.5e+45, 6e+41), cbt);
+    let Sun6 = new CBTravel.CB.CB(new CBTravel.math.Vector2(7e10, 2e10), 5e36, 2512560, new CBTravel.math.Vector2(-2.5e+45, -6e+44), cbt);
+    let Sun7 = new CBTravel.CB.CB(new CBTravel.math.Vector2(3.5e10, 2e10), 5e37, 2512560, new CBTravel.math.Vector2(-6e+46, -6e+44), cbt);
+    let BlackHole1 = new CBTravel.CB.CB(new CBTravel.math.Vector2(3.5e10, 5e9), 1e38, 1, new CBTravel.math.Vector2(-1.5e+45, -1.5e+46), cbt);
+    let BlackHole2 = new CBTravel.CB.CB(new CBTravel.math.Vector2(-3.5e10, 5e9), 5e37, 1, new CBTravel.math.Vector2(1.49e+40, -1.5e+46), cbt);
+    let BlackHole3 = new CBTravel.CB.CB(new CBTravel.math.Vector2(-3.5e10, 2e11), 5e38, 1, new CBTravel.math.Vector2(0, 0), cbt);
+    let BlackHole4 = new CBTravel.CB.CB(new CBTravel.math.Vector2(-3.5e10, -2e11), 5e38, 1, new CBTravel.math.Vector2(0, 0), cbt);
+    requestAnimationFrame(function cb() {
+        // cbt.x = Sun4.pos.x;
+        // cbt.y = Sun4.pos.y;
+        cbt.update();
+        requestAnimationFrame(cb);
+    });
+    // console.log(CBTravel.Physical.FGravity(Earth, Sun));
+    // cbt.update();
+</script>
+</body>
+</html>
